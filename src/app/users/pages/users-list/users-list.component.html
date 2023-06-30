@@ -1,0 +1,108 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let user">
+      <div *ngIf="user.isEdit" class="form-width">
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Nuevo Nombre">
+        </mat-form-field>
+      </div>
+      <div *ngIf="!user.isEdit">
+        {{user.nombre}}
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="apellido">
+    <th mat-header-cell *matHeaderCellDef> Apellido </th>
+    <td mat-cell *matCellDef="let user">
+      <div *ngIf="user.isEdit" class="form-width">
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Nuevo Apellido">
+        </mat-form-field>
+      </div>
+      <div *ngIf="!user.isEdit">
+        {{user.apellido}}
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="fechaNacimiento">
+    <th mat-header-cell *matHeaderCellDef> Fecha Nacimiento </th>
+    <td mat-cell *matCellDef="let user">
+      <div *ngIf="user.isEdit" class="form-width">
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Fecha">
+        </mat-form-field>
+      </div>
+      <div *ngIf="!user.isEdit">
+        {{user.fechaNacimiento}}
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let user">
+      <div *ngIf="user.isEdit" class="form-width">
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Nuevo correo">
+        </mat-form-field>
+      </div>
+      <div *ngIf="!user.isEdit">
+        {{user.email}}
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cargo">
+    <th mat-header-cell *matHeaderCellDef> Cargo </th>
+    <td mat-cell *matCellDef="let user">
+      <div *ngIf="user.isEdit" class="form-width">
+        <mat-form-field class="input-width">
+          <mat-label>Select an option</mat-label>
+          <mat-select>
+            <mat-option value="junior">Junior</mat-option>
+            <mat-option value="semi-senior">Semi Senior</mat-option>
+            <mat-option value="senior">Senior</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="!user.isEdit">
+        {{user.cargo}}
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef> Password </th>
+    <td mat-cell *matCellDef="let user">
+      <div *ngIf="user.isEdit" class="form-width">
+        <mat-form-field class="input-width">
+          <input matInput placeholder="Nueva contraseña">
+        </mat-form-field>
+      </div>
+      <div *ngIf="!user.isEdit">
+        {{user.password}}
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let user; let i = index" style="text-align: right;">
+        <a class="cursor" style="color: #1f516f;" matTooltip="Editar usuario" (click)="onEdit(user)">
+            <mat-icon>edit</mat-icon>
+        </a>
+        <a class="cursor" style="color: #e15639;" matTooltip="Eliminar usuario">
+            <mat-icon>delete</mat-icon>
+        </a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

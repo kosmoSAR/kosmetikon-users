@@ -1,0 +1,16 @@
+table {
+  margin: 1rem;
+  min-width: 97%;
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+.form-width {
+  width: 50%;
+}
+
+.input-width{
+  width: 100%;
+}

@@ -1,0 +1,46 @@
+<h1 mat-dialog-title style="display: flex; justify-content: space-between; margin-top: 1rem;">
+  <span>Crea un nuevo usuario</span>
+  <button mat-button mat-dialog-close>Close</button>
+</h1>
+<div mat-dialog-content>
+  <form class="form-new-user" [formGroup]="forms" (ngSubmit)="crearUsuario()">
+    <div style="display: flex; justify-content: space-evenly;">
+      <mat-form-field style="margin-right: 1rem;">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nuevo nombre" formControlName="nombre">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input matInput placeholder="Nuevo apellido" formControlName="apellido">
+      </mat-form-field>
+    </div>
+
+    <div style="display: flex; justify-content: space-evenly;">
+      <mat-form-field style="margin-right: 1rem;">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput placeholder="Nueva fecha de Nacimineto" formControlName="fechaNacimiento">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Nuevo correo" formControlName="email">
+      </mat-form-field>
+    </div>
+
+    <div style="display: flex; justify-content: space-evenly;">
+      <mat-form-field style="margin-right: 1rem;">
+        <mat-label>Cargo</mat-label>
+        <input matInput placeholder="Nuevo Cargo" formControlName="cargo">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Nueva contraseña" formControlName="password">
+      </mat-form-field>
+    </div>
+
+    <button mat-stroked-button color="primary" type="submit">Aceptar</button>
+</form>
+</div>
+

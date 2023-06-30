@@ -4,12 +4,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuarios } from 'src/app/interfaces/users.interface';
+import { UsersService } from 'src/app/services/users.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @Component({
   selector: 'shared-button-dialog',
   templateUrl: './button-dialog.component.html',
-  styleUrls: ['./button-dialog.component.css']
 })
 export class ButtonDialogComponent {
 
@@ -24,20 +26,20 @@ export class ButtonDialogComponent {
   selector: 'dialog-elements-example-dialog',
   templateUrl: 'dialog-elements-example-dialog.html',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, MatInputModule, ReactiveFormsModule],
+  imports: [MatDialogModule, MatButtonModule, MatInputModule, ReactiveFormsModule, MatDatepickerModule, MatSelectModule],
 })
 export class DialogElementsExampleDialog {
 
   public forms:FormGroup;
 
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder, private _userService: UsersService){
     this.forms = this.fb.group({
-      nombre:[''],
-      apellido:[''],
-      fechaNacimiento:[''],
-      email:[''],
-      cargo:[''],
-      password:[''],
+      nombre:['', Validators.required],
+      apellido:['', Validators.required],
+      fechaNacimiento:['', Validators.required],
+      email:['', Validators.required],
+      cargo:['', Validators.required],
+      password:['', Validators.required],
     })
   }
 
@@ -53,6 +55,7 @@ export class DialogElementsExampleDialog {
     }
 
     console.log(usuario);
+    this._userService.newUser(usuario)
 
   }
 

@@ -19,7 +19,10 @@
     <div style="display: flex; justify-content: space-evenly;">
       <mat-form-field style="margin-right: 1rem;">
         <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput placeholder="Nueva fecha de Nacimineto" formControlName="fechaNacimiento">
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field>
@@ -31,7 +34,12 @@
     <div style="display: flex; justify-content: space-evenly;">
       <mat-form-field style="margin-right: 1rem;">
         <mat-label>Cargo</mat-label>
-        <input matInput placeholder="Nuevo Cargo" formControlName="cargo">
+        <mat-select formControlName="cargo">
+          <mat-option value="">ninguno</mat-option>
+          <mat-option value="junior">Junior</mat-option>
+          <mat-option value="semi-senior">Semi Senior</mat-option>
+          <mat-option value="senior">Senior</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">

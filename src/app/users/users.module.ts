@@ -10,7 +10,7 @@ import { ButtonDialogComponent } from './components/button-dialog/button-dialog.
 @NgModule({
   declarations: [
     UsersListComponent,
-    ButtonDialogComponent,
+    ButtonDialogComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +18,7 @@ import { ButtonDialogComponent } from './components/button-dialog/button-dialog.
   ],
   exports: [
     UsersListComponent,
-    ButtonDialogComponent,
+    ButtonDialogComponent
   ]
 })
 export class UsersModule { }

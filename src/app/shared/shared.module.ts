@@ -13,7 +13,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
   ],
   exports: [
     CommonModule,
@@ -42,6 +48,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
 
     // Componentes
     TitleComponent,

@@ -1,6 +1,5 @@
 table {
-  margin: 1rem;
-  min-width: 97%;
+  border: 1px solid black;
 }
 
 .cursor{

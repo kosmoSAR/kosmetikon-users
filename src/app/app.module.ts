@@ -19,7 +19,7 @@ import { UsersService } from './services/users.service';
     SharedModule,
     UsersModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [UsersService],
   bootstrap: [AppComponent]

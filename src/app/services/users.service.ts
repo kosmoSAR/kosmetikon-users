@@ -11,6 +11,11 @@ export class UsersService {
   public ELEMENT_DATA: Usuarios[] = [
     {nombre: "Santiago", apellido: 'Aristizabal', fechaNacimiento: new Date, email: 'jsanti@gmail.com', cargo: "junior", password: "1234"},
     {nombre: "Raul", apellido: 'Ruiz', fechaNacimiento: new Date, email: 'raul@gmail.com', cargo: "senior", password: "5678"},
+    {nombre: "Raul", apellido: 'Ruiz', fechaNacimiento: new Date, email: 'raul@gmail.com', cargo: "senior", password: "5678"},
+    {nombre: "Raul", apellido: 'Ruiz', fechaNacimiento: new Date, email: 'raul@gmail.com', cargo: "senior", password: "5678"},
+    {nombre: "Raul", apellido: 'Ruiz', fechaNacimiento: new Date, email: 'raul@gmail.com', cargo: "senior", password: "5678"},
+    {nombre: "Raul", apellido: 'Ruiz', fechaNacimiento: new Date, email: 'raul@gmail.com', cargo: "senior", password: "5678"},
+    {nombre: "Raul", apellido: 'Ruiz', fechaNacimiento: new Date, email: 'raul@gmail.com', cargo: "senior", password: "5678"},
   ];
 
   public data_editar: any[] = [...this.ELEMENT_DATA]

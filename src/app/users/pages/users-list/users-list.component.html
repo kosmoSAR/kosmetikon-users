@@ -1,11 +1,17 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8 div-table">
+  <table mat-table [dataSource]="dataSource" >
 
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef> Nombre </th>
       <td mat-cell *matCellDef="let user">
         <div *ngIf="user.isEdit" style="margin-top: 1rem;">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nuevo Nombre" [(ngModel)] = "user.nombre" >
+            <input matInput placeholder="Nuevo Nombre" [(ngModel)]="user.nombre">
           </mat-form-field>
         </div>
         <div *ngIf="!user.isEdit">
@@ -19,7 +25,7 @@
       <td mat-cell *matCellDef="let user">
         <div *ngIf="user.isEdit" style="margin-top: 1rem;">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nuevo Apellido" [(ngModel)] = "user.apellido">
+            <input matInput placeholder="Nuevo Apellido" [(ngModel)]="user.apellido">
           </mat-form-field>
         </div>
         <div *ngIf="!user.isEdit">
@@ -35,7 +41,7 @@
         <div *ngIf="user.isEdit" style="margin-top: 1rem;">
           <mat-form-field>
             <mat-label>Elige una fecha</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)] = "user.fechaNacimiento">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="user.fechaNacimiento">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -53,7 +59,7 @@
       <td mat-cell *matCellDef="let user">
         <div *ngIf="user.isEdit" style="margin-top: 1rem;">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nuevo correo" [(ngModel)] = "user.email">
+            <input matInput placeholder="Nuevo correo" [(ngModel)]="user.email">
           </mat-form-field>
         </div>
         <div *ngIf="!user.isEdit">
@@ -66,12 +72,12 @@
       <th mat-header-cell *matHeaderCellDef> Cargo </th>
       <td mat-cell *matCellDef="let user">
         <div *ngIf="user.isEdit" style="margin-top: 1rem; width: 100px;">
-            <mat-select [(ngModel)] = "user.cargo">
-              <mat-option value="">ninguno</mat-option>
-              <mat-option value="junior">Junior</mat-option>
-              <mat-option value="semi-senior">Semi Senior</mat-option>
-              <mat-option value="senior">Senior</mat-option>
-            </mat-select>
+          <mat-select [(ngModel)]="user.cargo">
+            <mat-option value="">ninguno</mat-option>
+            <mat-option value="junior">Junior</mat-option>
+            <mat-option value="semi-senior">Semi Senior</mat-option>
+            <mat-option value="senior">Senior</mat-option>
+          </mat-select>
         </div>
         <div *ngIf="!user.isEdit">
           {{user.cargo}}
@@ -84,7 +90,7 @@
       <td mat-cell *matCellDef="let user">
         <div *ngIf="user.isEdit" style="margin-top: 1rem;">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nueva contraseña" [(ngModel)] = "user.password">
+            <input matInput placeholder="Nueva contraseña" [(ngModel)]="user.password">
           </mat-form-field>
         </div>
         <div *ngIf="!user.isEdit">
@@ -96,16 +102,26 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let user; let i = index" style="text-align: right;">
-          <a *ngIf="!user.isEdit" class="cursor" style="color: #1f516f;" matTooltip="Editar usuario" (click)="onEdit(user)">
-              <mat-icon>edit</mat-icon>
-          </a>
-          <button *ngIf="user.isEdit" mat-stroked-button color="primary" type="button" (click)="sendInfo(user)">Aceptar</button>
-          <a *ngIf="!user.isEdit" class="cursor" style="color: #e15639;" matTooltip="Eliminar usuario" (click)="eliminar(user)">
-              <mat-icon>delete</mat-icon>
-          </a>
+        <a *ngIf="!user.isEdit" class="cursor" style="color: #1f516f;" matTooltip="Editar usuario"
+          (click)="onEdit(user)">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <button *ngIf="user.isEdit" mat-stroked-button color="primary" type="button"
+          (click)="sendInfo(user)">Aceptar</button>
+        <a *ngIf="!user.isEdit" class="cursor" style="color: #e15639;" matTooltip="Eliminar usuario"
+          (click)="eliminar(user)">
+          <mat-icon>delete</mat-icon>
+        </a>
       </td>
     </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="50"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25]"
+              aria-label="Select page">
+  </mat-paginator>
+</div>

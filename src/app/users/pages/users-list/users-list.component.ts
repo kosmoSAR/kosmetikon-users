@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Usuarios} from 'src/app/interfaces/users.interface';
+import { MatTableDataSource } from '@angular/material/table';
+import { Usuarios, UsuariosEdit} from 'src/app/interfaces/users.interface';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -11,19 +13,21 @@ import { UsersService } from 'src/app/services/users.service';
 export class UsersListComponent implements OnInit{
 
   displayedColumns: string[] = ['nombre', 'apellido', 'fechaNacimiento', 'email', 'cargo', 'password', 'acciones'];
-  dataSource = this._userService.data_editar;
+  dataSource = new MatTableDataSource(this._userService.data_editar);
 
-  public isEdit: boolean = false;
-  public listUsers: any;
+  public userInfo!: Usuarios;
 
-  constructor( private _userService: UsersService, private _snackBar: MatSnackBar){
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit(): void {
     this.agregarPropiedadUsuarios("isEdit", false);
   }
 
-  public userInfo!: Usuarios;
+  constructor( private _userService: UsersService, private _snackBar: MatSnackBar){}
 
   agregarPropiedadUsuarios(propiedad: string, valor: boolean): void {
     this._userService.data_editar.forEach(usuario => {
@@ -31,11 +35,16 @@ export class UsersListComponent implements OnInit{
     });
   }
 
-  onEdit( user: any ){
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onEdit( user: UsuariosEdit ){
     user.isEdit = !user.isEdit;
   }
 
-  sendInfo( user: any ){
+  sendInfo( user: UsuariosEdit ){
     user.isEdit = !user.isEdit;
 
     this.userInfo = {
@@ -52,7 +61,7 @@ export class UsersListComponent implements OnInit{
     this.editSnackBar();
   }
 
-  eliminar( user: Usuarios ){
+  eliminar( user: UsuariosEdit ){
 
     this.userInfo = {
       nombre: user.nombre,

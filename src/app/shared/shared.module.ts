@@ -17,7 +17,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   exports: [
     CommonModule,
@@ -54,6 +55,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatNativeDateModule,
     FormsModule,
     MatSnackBarModule,
+    MatPaginatorModule,
 
     // Componentes
     TitleComponent,

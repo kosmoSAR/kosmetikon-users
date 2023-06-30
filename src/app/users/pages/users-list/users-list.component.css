@@ -1,4 +1,4 @@
-table {
+.div-table{
   border: 1px solid black;
 }
 
@@ -11,5 +11,10 @@ table {
 }
 
 .input-width{
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
   width: 100%;
 }

@@ -7,6 +7,7 @@ import { Usuarios } from 'src/app/interfaces/users.interface';
 import { UsersService } from 'src/app/services/users.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class DialogElementsExampleDialog {
 
   public forms:FormGroup;
 
-  constructor(private fb:FormBuilder, private _userService: UsersService){
+  constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar){
     this.forms = this.fb.group({
       nombre:['', Validators.required],
       apellido:['', Validators.required],
@@ -45,7 +46,6 @@ export class DialogElementsExampleDialog {
 
   crearUsuario(){
     const usuario: Usuarios = {
-      isEdit: false,
       nombre: this.forms.value.nombre,
       apellido: this.forms.value.apellido,
       fechaNacimiento: this.forms.value.fechaNacimiento,
@@ -55,8 +55,17 @@ export class DialogElementsExampleDialog {
     }
 
     console.log(usuario);
-    this._userService.newUser(usuario)
+    // this._userService.newUser(usuario)
+    this.createSnackBar()
 
+  }
+
+  createSnackBar() {
+    this._snackBar.open("Has añadido un nuevo cliente", "",{
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 
 

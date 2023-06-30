@@ -1,42 +1,88 @@
-import { Component } from '@angular/core';
-import { Usuarios } from 'src/app/interfaces/users.interface';
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Usuarios} from 'src/app/interfaces/users.interface';
 import { UsersService } from 'src/app/services/users.service';
-
-const ELEMENT_DATA: Usuarios[] = [
-  {isEdit: false, nombre: "Santiago", apellido: 'Aristizabal', fechaNacimiento: "12/26", email: 'jsanti@gmail.com', cargo: "junior", password: "1234"},
-  {isEdit: false, nombre: "Santiago", apellido: 'Aristizabal', fechaNacimiento: "12/26", email: 'jsanti@gmail.com', cargo: "junior", password: "1234"},
-];
 
 @Component({
   selector: 'users-list',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css'],
 })
-export class UsersListComponent {
+export class UsersListComponent implements OnInit{
 
   displayedColumns: string[] = ['nombre', 'apellido', 'fechaNacimiento', 'email', 'cargo', 'password', 'acciones'];
-  dataSource = ELEMENT_DATA;
+  dataSource = this._userService.data_editar;
 
-  constructor( private _userService: UsersService ){}
+  public isEdit: boolean = false;
+  public listUsers: any;
+
+  constructor( private _userService: UsersService, private _snackBar: MatSnackBar){
+  }
+
+  ngOnInit(): void {
+    this.agregarPropiedadUsuarios("isEdit", false);
+  }
 
   public userInfo!: Usuarios;
 
-  onEdit( user: Usuarios ){
-    user.isEdit = !user.isEdit;
-    this.userInfo = user;
-    console.log(this.userInfo);
+  agregarPropiedadUsuarios(propiedad: string, valor: boolean): void {
+    this._userService.data_editar.forEach(usuario => {
+      usuario[propiedad] = valor;
+    });
   }
 
-  sendInfo( user: Usuarios ){
+  onEdit( user: any ){
     user.isEdit = !user.isEdit;
-    this.userInfo = user;
+  }
+
+  sendInfo( user: any ){
+    user.isEdit = !user.isEdit;
+
+    this.userInfo = {
+      nombre: user.nombre,
+      apellido: user.apellido,
+      fechaNacimiento: user.fechaNacimiento,
+      email: user.email,
+      cargo: user.cargo,
+      password: user.password
+    };
+
     console.log(this.userInfo);
-    this._userService.updateUser( this.userInfo );
+    // this._userService.updateUser( this.userInfo );
+    this.editSnackBar();
   }
 
   eliminar( user: Usuarios ){
-    console.log(user);
-    this._userService.deleteUser(user)
+
+    this.userInfo = {
+      nombre: user.nombre,
+      apellido: user.apellido,
+      fechaNacimiento: user.fechaNacimiento,
+      email: user.email,
+      cargo: user.cargo,
+      password: user.password
+    };
+
+    console.log(this.userInfo);
+
+    // this._userService.deleteUser(user);
+    this.deleteSnackBar();
+  }
+
+  deleteSnackBar() {
+    this._snackBar.open("Has eliminado el usuario", "",{
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  editSnackBar() {
+    this._snackBar.open("Has realizado cambios satisfactoriamente", "",{
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 
 }

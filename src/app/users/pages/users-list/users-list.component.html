@@ -42,7 +42,7 @@
           </mat-form-field>
         </div>
         <div *ngIf="!user.isEdit">
-          {{user.fechaNacimiento}}
+          {{user.fechaNacimiento.toString().slice(7,10)}}/{{user.fechaNacimiento.toString().slice(13,15)}}
         </div>
       </td>
     </ng-container>

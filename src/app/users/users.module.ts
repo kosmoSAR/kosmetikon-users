@@ -5,12 +5,10 @@ import { SharedModule } from '../shared/shared.module';
 import { UsersListComponent } from './pages/users-list/users-list.component';
 import { ButtonDialogComponent } from './components/button-dialog/button-dialog.component';
 
-
-
 @NgModule({
   declarations: [
     UsersListComponent,
-    ButtonDialogComponent
+    ButtonDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +16,7 @@ import { ButtonDialogComponent } from './components/button-dialog/button-dialog.
   ],
   exports: [
     UsersListComponent,
-    ButtonDialogComponent
+    ButtonDialogComponent,
   ]
 })
 export class UsersModule { }

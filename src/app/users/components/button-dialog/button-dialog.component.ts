@@ -84,7 +84,7 @@ export class modalUsers implements OnInit {
           this.updateSnackBar()
         },
         error: ( error: any ) => {
-          console.log(error);
+          this.errorSnackBar( error.error.message )
         }
       });
     } else if ( this.data.event === 'new' ) {
@@ -95,7 +95,7 @@ export class modalUsers implements OnInit {
           this.createSnackBar()
         },
         error: ( error: any ) => {
-          console.log(error);
+          this.errorSnackBar( error.error.message )
         }
       });
     }
@@ -106,12 +106,22 @@ export class modalUsers implements OnInit {
       duration: 2000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
-    });
+    })
+    window.location.href = "./index.html"
   }
 
   updateSnackBar() {
     this._snackBar.open("Has actualizado al cliente", "",{
       duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+    window.location.href = "./index.html"
+  }
+
+  errorSnackBar( error: string ) {
+    this._snackBar.open( error, "",{
+      duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });

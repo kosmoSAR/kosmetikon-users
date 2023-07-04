@@ -39,9 +39,10 @@ export class ModalPasswordComponent {
         console.log(resp);
         this.deleteSnackBar();
         this.dialogRef.close()
+        window.location.href = "./index.html"
       },
       error: ( error: any ) => {
-        console.log(error);
+        this.errorSnackBar( error.error.message )
       }
     })
   }
@@ -49,6 +50,14 @@ export class ModalPasswordComponent {
   deleteSnackBar() {
     this._snackBar.open("Has eliminado el usuario", "",{
       duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  errorSnackBar( error: string ) {
+    this._snackBar.open( error, "",{
+      duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });

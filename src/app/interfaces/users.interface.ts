@@ -1,8 +1,8 @@
-export interface Usuarios{
-  nombre: string;
-  apellido: string;
-  fechaNacimiento: Date;
-  email: string;
-  cargo: string;
-  password: string;
+export interface Usuarios {
+  NOMBRE:           string;
+  APELLIDO:         string;
+  FECHA_NACIMIENTO: string;
+  EMAIL:            string;
+  CARGO:            string;
+  PASSWORD:         string;
 }

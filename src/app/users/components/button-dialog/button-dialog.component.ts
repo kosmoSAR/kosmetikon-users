@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuarios } from 'src/app/interfaces/users.interface';
@@ -8,7 +8,6 @@ import { UsersService } from 'src/app/services/users.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Dialog, DialogModule } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -17,12 +16,10 @@ import { Dialog, DialogModule } from '@angular/cdk/dialog';
 })
 export class ButtonDialogComponent {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private _snackBar: MatSnackBar) {}
 
   openDialog(event: string) {
-    this.dialog.open(modalUsers, {
-      data: { user:null , event }
-    });
+    this.dialog.open(modalUsers, { data: { user:null , event } });
   }
 }
 
@@ -37,6 +34,7 @@ export class modalUsers implements OnInit {
   public forms!: FormGroup;
 
   constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<modalUsers>,
     @Inject(MAT_DIALOG_DATA) public data: any){
 
     {
@@ -51,12 +49,12 @@ export class modalUsers implements OnInit {
         })
       } else if ( data.event === 'update' ){
         this.forms = this.fb.group({
-          nombre:[data.user.nombre, Validators.required],
-          apellido:[data.user.apellido, Validators.required],
-          fechaNacimiento:[data.user.fechaNacimiento, Validators.required],
-          email:[data.user.email, Validators.required],
-          cargo:[data.user.cargo, Validators.required],
-          password:[data.user.password, Validators.required],
+          nombre:[data.user.NOMBRE, Validators.required],
+          apellido:[data.user.APELLIDO, Validators.required],
+          fechaNacimiento:[data.user.FECHA_NACIMIENTO, Validators.required],
+          email:[data.user.EMAIL, Validators.required],
+          cargo:[data.user.CARGO, Validators.required],
+          password:[data.user.PASSWORD, Validators.required],
         })
       }
     }
@@ -67,21 +65,39 @@ export class modalUsers implements OnInit {
 
   newEditUser(){
 
+    console.log(this.forms.value.fechaNacimiento);
+
     const usuario: Usuarios = {
-      nombre: this.forms.value.nombre,
-      apellido: this.forms.value.apellido,
-      fechaNacimiento: this.forms.value.fechaNacimiento,
-      email: this.forms.value.email,
-      cargo: this.forms.value.cargo,
-      password: this.forms.value.password
+      NOMBRE: this.forms.value.nombre,
+      APELLIDO: this.forms.value.apellido,
+      FECHA_NACIMIENTO: this.forms.value.fechaNacimiento,
+      EMAIL: this.forms.value.email,
+      CARGO: this.forms.value.cargo,
+      PASSWORD: this.forms.value.password
     }
 
     if ( this.data.event === 'update' ) {
-      console.log(usuario);
-      this.updateSnackBar()
+      this._userService.updateUser( usuario ).subscribe({
+        next: ( resp: any ) => {
+          console.log(resp);
+          this.dialogRef.close();
+          this.updateSnackBar()
+        },
+        error: ( error: any ) => {
+          console.log(error);
+        }
+      });
     } else if ( this.data.event === 'new' ) {
-      console.log(usuario);
-      this.createSnackBar()
+      this._userService.newUser( usuario ).subscribe({
+        next: ( resp: any ) => {
+          this.forms.reset();
+          this.dialogRef.close();
+          this.createSnackBar()
+        },
+        error: ( error: any ) => {
+          console.log(error);
+        }
+      });
     }
   }
 

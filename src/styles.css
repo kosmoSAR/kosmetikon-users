@@ -10,3 +10,14 @@ body {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+/*Scroll bar*/
+body::-webkit-scrollbar {
+  width: 10px;
+  background: rgb(199, 154, 56);
+}
+body::-webkit-scrollbar-thumb {
+  background: #e8edec;
+  border-radius: 10px;
+  border-right: 2px solid #161a1e;
+}

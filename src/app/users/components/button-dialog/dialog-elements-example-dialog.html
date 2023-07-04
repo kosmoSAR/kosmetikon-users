@@ -3,7 +3,7 @@
   <button mat-button mat-dialog-close>Close</button>
 </h1>
 <div mat-dialog-content>
-  <form class="form-new-user" [formGroup]="forms" (ngSubmit)="crearUsuario()">
+  <form class="form-new-user" [formGroup]="forms" (ngSubmit)="newEditUser()">
     <div style="display: flex; justify-content: space-evenly;">
       <mat-form-field style="margin-right: 1rem; width: 225px;">
         <mat-label>Nombre</mat-label>

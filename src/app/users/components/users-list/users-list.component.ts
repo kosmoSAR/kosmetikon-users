@@ -1,19 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { Usuarios, UsuariosEdit} from 'src/app/interfaces/users.interface';
+import { Usuarios} from 'src/app/interfaces/users.interface';
 import { UsersService } from 'src/app/services/users.service';
+import { modalUsers } from '../button-dialog/button-dialog.component';
 
 @Component({
   selector: 'users-list',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css'],
 })
-export class UsersListComponent implements OnInit{
+export class UsersListComponent{
 
   displayedColumns: string[] = ['nombre', 'apellido', 'fechaNacimiento', 'email', 'cargo', 'password', 'acciones'];
-  dataSource = new MatTableDataSource(this._userService.data_editar);
+  dataSource = new MatTableDataSource(this._userService.ELEMENT_DATA);
 
   public userInfo!: Usuarios;
 
@@ -23,45 +25,14 @@ export class UsersListComponent implements OnInit{
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnInit(): void {
-    this.agregarPropiedadUsuarios("isEdit", false);
-  }
-
-  constructor( private _userService: UsersService, private _snackBar: MatSnackBar){}
-
-  agregarPropiedadUsuarios(propiedad: string, valor: boolean): void {
-    this._userService.data_editar.forEach(usuario => {
-      usuario[propiedad] = valor;
-    });
-  }
+  constructor( private _userService: UsersService, private _snackBar: MatSnackBar, public dialog: MatDialog){}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onEdit( user: UsuariosEdit ){
-    user.isEdit = !user.isEdit;
-  }
-
-  sendInfo( user: UsuariosEdit ){
-    user.isEdit = !user.isEdit;
-
-    this.userInfo = {
-      nombre: user.nombre,
-      apellido: user.apellido,
-      fechaNacimiento: user.fechaNacimiento,
-      email: user.email,
-      cargo: user.cargo,
-      password: user.password
-    };
-
-    console.log(this.userInfo);
-    // this._userService.updateUser( this.userInfo );
-    this.editSnackBar();
-  }
-
-  eliminar( user: UsuariosEdit ){
+  eliminar( user: Usuarios ){
 
     this.userInfo = {
       nombre: user.nombre,
@@ -86,11 +57,9 @@ export class UsersListComponent implements OnInit{
     });
   }
 
-  editSnackBar() {
-    this._snackBar.open("Has realizado cambios satisfactoriamente", "",{
-      duration: 2000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+  openDialog(user: Usuarios, event: string) {
+    this.dialog.open(modalUsers, {
+      data: {user , event}
     });
   }
 

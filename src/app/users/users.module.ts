@@ -10,8 +10,8 @@ import { ModalPasswordComponent } from './components/modal-password/modal-passwo
 @NgModule({
   declarations: [
     UsersListComponent,
-    ButtonDialogComponent,
     UsersTableComponent,
+    ButtonDialogComponent,
     ModalPasswordComponent,
   ],
   imports: [

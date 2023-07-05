@@ -84,7 +84,7 @@ export class modalUsers implements OnInit {
           this.updateSnackBar()
         },
         error: ( error: any ) => {
-          this.errorSnackBar( error.error.message )
+          this.errorSnackBar( error.error )
         }
       });
     } else if ( this.data.event === 'new' ) {
@@ -95,7 +95,9 @@ export class modalUsers implements OnInit {
           this.createSnackBar()
         },
         error: ( error: any ) => {
-          this.errorSnackBar( error.error.message )
+          console.log(error.error);
+
+          this.errorSnackBar( error.error )
         }
       });
     }

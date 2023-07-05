@@ -53,7 +53,7 @@ export class UsersListComponent implements OnInit{
 
   eliminar( user: Usuarios ): void{
       this.dialogDelete.open(ModalPasswordComponent, {
-        data: { user: user.EMAIL},
+        data: { EMAIL: user.EMAIL, NOMBRE: user.NOMBRE},
       });
   }
 

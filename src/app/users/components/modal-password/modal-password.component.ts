@@ -5,36 +5,35 @@ import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-modal-password',
-  template: `
-  <h2 style="text-align: center;">Escribe la contraseña</h2>
-    <mat-form-field class="example-full-width" style="margin: 1rem;">
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Contraseña" (keyup.enter)="PasswordEdit()" #txtTagInput>
-    </mat-form-field>
-  `
+  templateUrl: 'modal-password.component.html',
+  styleUrls: ['modal-password.component.css']
 })
 
 export class ModalPasswordComponent {
+
+  public userInfo: any;
+  public onDelete: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ModalPasswordComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private _userService: UsersService,
     private _snackBar: MatSnackBar
-  ) {
-    console.log(data);
-  }
+  ) { }
 
   @ViewChild('txtTagInput')
   public tagInput!: ElementRef<HTMLInputElement>
 
   PasswordEdit(){
-    const userInfo = {
-      EMAIL: this.data.user,
+    this.userInfo = {
+      EMAIL: this.data.EMAIL,
       PASSWORD: this.tagInput.nativeElement.value,
     }
-    console.log(userInfo);
 
-    this._userService.deleteUser( userInfo ).subscribe({
+    this.onDelete = true;
+  }
+
+  deleteUser(){
+    this._userService.deleteUser( this.userInfo ).subscribe({
       next: ( resp: any ) => {
         console.log(resp);
         this.deleteSnackBar();
@@ -42,9 +41,13 @@ export class ModalPasswordComponent {
         window.location.href = "./index.html"
       },
       error: ( error: any ) => {
-        this.errorSnackBar( error.error.message )
+        this.errorSnackBar( error.error )
       }
     })
+  }
+
+  closedlg(){
+    this.dialogRef.close()
   }
 
   deleteSnackBar() {

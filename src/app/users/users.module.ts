@@ -6,6 +6,9 @@ import { UsersListComponent } from './components/users-list/users-list.component
 import { ButtonDialogComponent } from './components/button-dialog/button-dialog.component';
 import { UsersTableComponent } from './pages/users-table/users-table.component';
 import { ModalPasswordComponent } from './components/modal-password/modal-password.component';
+import { InicioComponent } from './pages/inicio/inicio.component';
+import { UsersComponent } from './users.component';
+import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,13 +16,17 @@ import { ModalPasswordComponent } from './components/modal-password/modal-passwo
     UsersTableComponent,
     ButtonDialogComponent,
     ModalPasswordComponent,
+    InicioComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    UsersRoutingModule
   ],
   exports: [
-    UsersTableComponent
+    UsersTableComponent,
+    InicioComponent
   ]
 })
 export class UsersModule { }

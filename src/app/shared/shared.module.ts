@@ -18,6 +18,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatNativeDateModule,
     FormsModule,
     MatSnackBarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -56,6 +59,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FormsModule,
     MatSnackBarModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
 
     // Componentes
     TitleComponent,

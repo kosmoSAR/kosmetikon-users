@@ -8,7 +8,7 @@ import { Usuarios } from '../interfaces/users.interface';
 })
 export class UsersService {
 
-  baseUrl = 'http://kosmetikon.myqnapcloud.com:8769';
+  baseUrl = 'http://kosmetikon.myqnapcloud.com:44444';
 // pedir al Equipo de backend la URL de la nube
 
   constructor( private http: HttpClient) { }
@@ -27,6 +27,14 @@ export class UsersService {
 
   deleteUser(data: any): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/deleteUser`, {body: data} );
+  }
+
+  login(data: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/login`, data , { headers: {'Content-Type': 'application/json'}, observe: 'response' });
+  }
+
+  logout(data: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/logout`, {body: data} );
   }
 
 }

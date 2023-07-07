@@ -1,0 +1,44 @@
+<form class="form-new-user" [formGroup]="forms" (ngSubmit)="newUser()">
+  <div style="display: flex; justify-content: space-evenly;">
+    <mat-form-field style="margin-right: 1rem; width: 250px;">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nuevo nombre" formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field style="width: 250px;">
+      <mat-label>Apellido</mat-label>
+      <input matInput placeholder="Nuevo apellido" formControlName="apellido">
+    </mat-form-field>
+  </div>
+
+  <div style="display: flex; justify-content: space-evenly;">
+    <mat-form-field style="margin-right: 1rem; width: 250px;">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput formControlName="fechaNacimiento" [maxLength]="10">
+      <mat-hint>YYYY-MM-DD</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field style="width: 250px;">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Nuevo correo" formControlName="email" >
+    </mat-form-field>
+  </div>
+
+  <div style="display: flex; justify-content: space-evenly;">
+    <mat-form-field style="margin-right: 1rem; width: 250px;">
+      <mat-label>Cargo</mat-label>
+      <mat-select formControlName="cargo">
+        <mat-option value="">ninguno</mat-option>
+        <mat-option value="R&D Manager">R&D Manager</mat-option>
+        <mat-option value="Employee">Employee</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" style="width: 250px;">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Nueva contraseña" formControlName="password">
+    </mat-form-field>
+  </div>
+
+  <button mat-stroked-button color="primary" type="submit" [disabled]="forms.invalid" >Aceptar</button>
+</form>

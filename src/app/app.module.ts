@@ -4,12 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './users/users.module';
 
 import { UsersService } from './services/users.service';
+
+import { CookieService } from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,7 @@ import { UsersService } from './services/users.service';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [UsersService],
+  providers: [UsersService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

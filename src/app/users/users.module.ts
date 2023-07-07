@@ -9,6 +9,8 @@ import { ModalPasswordComponent } from './components/modal-password/modal-passwo
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { UsersRoutingModule } from './users-routing.module';
     ButtonDialogComponent,
     ModalPasswordComponent,
     InicioComponent,
-    UsersComponent
+    UsersComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    UsersRoutingModule
+    UsersRoutingModule,
   ],
   exports: [
     UsersTableComponent,

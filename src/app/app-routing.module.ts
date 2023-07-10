@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './users/pages/inicio/inicio.component';
 import { UsersTableComponent } from './users/pages/users-table/users-table.component';
+import { LoginGuardian } from './users/components/login/login-guardian';
 
 const routes: Routes = [
   { path: 'login', component: InicioComponent},
-  { path: 'dashboard', loadChildren: () => import('./users/users.module').then(res => res.UsersModule) },
+  { path: 'dashboard', loadChildren: () => import('./users/users.module').then(res => res.UsersModule), canActivate:[LoginGuardian] },
   { path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];
 

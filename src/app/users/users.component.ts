@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-users',
-  template: `<shared-title></shared-title>
-
-  <router-outlet></router-outlet>`
+  templateUrl: 'users.component.html'
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
+
+  constructor(private cookies: CookieService){
+
+  }
+  ngOnInit(): void {
+    this.cookies.get('acccess_token')
+  }
 
 }

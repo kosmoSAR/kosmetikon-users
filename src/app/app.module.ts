@@ -12,6 +12,7 @@ import { UsersModule } from './users/users.module';
 import { UsersService } from './services/users.service';
 
 import { CookieService } from 'ngx-cookie-service';
+import { TokenInterceptor } from './interceptor/token-interceptor.interceptor';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [UsersService, CookieService],
+  providers: [UsersService, CookieService, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

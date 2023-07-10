@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   forms:FormGroup;
   loading:boolean = false;
@@ -23,6 +23,13 @@ export class LoginComponent {
     })
   }
 
+  ngOnInit(): void {
+    if ( this.cookies.get('token') ) {
+      this.firstLogout();
+      this.router.navigate(['dashboard']);
+    }
+  }
+
   ingresar(){
 
     const user:any = {
@@ -30,22 +37,18 @@ export class LoginComponent {
       PASSWORD: this.forms.value.password
     }
 
-    console.log(user);
-
     this._userService.login( user ).subscribe({
       next: (resp:any) => {
-        const headers = resp.headers;
-        console.log(headers);
-        // this.router.navigate(['dashboard'])
+        this.cookies.set('access_token',resp.body.token)
+        this.router.navigate(['dashboard'])
       },
       error: (error:any) => {
         console.log(error);
         this.error()
       }
     })
-
-    //frankdeza@kosmetikon.es
-
+    //jsanti3@gmail.com
+    //123456
   }
 
   error(){
@@ -56,16 +59,11 @@ export class LoginComponent {
     });
   };
 
-  // fakeLoading(){
-  //   this.loading = true;
-  //   setTimeout(()=>{
-  //     this.loading = false;
-  //     this.router.navigate(['dashboard']);
-  //     this._userService.getUserList().pipe(
-  //       filter(  )
-  //     ).subscribe(console.log)
-  //   },1500)
-  // }
-
-
+  firstLogout(){
+    this._snackBar.open('Debes dar click en Logout primero', "", {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  };
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Usuarios } from 'src/app/interfaces/users.interface';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -14,7 +15,8 @@ export class RegisterComponent {
 
   public forms!: FormGroup;
 
-  constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar, private router:Router) {
+  constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar, private router:Router,
+    private cookies:CookieService) {
         this.forms = this.fb.group({
           nombre:['', Validators.required],
           apellido:['', Validators.required],
@@ -74,6 +76,7 @@ export class RegisterComponent {
 
         this._userService.login( loginUser ).subscribe({
           next: (resp => {
+            this.cookies.set('token',resp.body.token)
             this.router.navigate(['dashboard'])
           })
         })

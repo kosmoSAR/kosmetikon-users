@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuarios } from '../interfaces/users.interface';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class UsersService {
   baseUrl = 'http://kosmetikon.myqnapcloud.com:44444';
 // pedir al Equipo de backend la URL de la nube
 
-  constructor( private http: HttpClient) { }
+
+  constructor( private http: HttpClient) {
+  }
 
   getUserList(): Observable<any> {
     return this.http.get<any[]>(`${this.baseUrl}/getUserList`);
@@ -33,8 +36,8 @@ export class UsersService {
     return this.http.post<any>(`${this.baseUrl}/login`, data , { headers: {'Content-Type': 'application/json'}, observe: 'response' });
   }
 
-  logout(data: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/logout`, {body: data} );
+  logout(): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/logout`);
   }
 
 }

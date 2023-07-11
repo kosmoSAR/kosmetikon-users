@@ -30,17 +30,6 @@ export class InicioComponent {
       EMAIL: this.forms.value.usuario,
       PASSWORD: this.forms.value.password
     }
-
-    // const correoUser = this.forms.value.usuario;
-
-    // this._userService.getUserList().pipe(
-    //   map( user => user.data),
-    //   filter( (user, index) => user[index].EMAIL === correoUser),
-    //   tap( filteredUsers => console.log(filteredUsers))
-    // ).subscribe( )
-
-    //frankdeza@kosmetikon.es
-
   }
 
   error(){
@@ -50,17 +39,6 @@ export class InicioComponent {
       verticalPosition: 'bottom'
     });
   };
-
-  // fakeLoading(){
-  //   this.loading = true;
-  //   setTimeout(()=>{
-  //     this.loading = false;
-  //     this.router.navigate(['dashboard']);
-  //     this._userService.getUserList().pipe(
-  //       filter(  )
-  //     ).subscribe(console.log)
-  //   },1500)
-  // }
 
   loginOn(){
     this.loginForm = true;

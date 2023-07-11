@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './users/pages/inicio/inicio.component';
-import { UsersTableComponent } from './users/pages/users-table/users-table.component';
 import { LoginGuardian } from './users/components/login/login-guardian';
 
 const routes: Routes = [

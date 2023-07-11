@@ -28,7 +28,7 @@ import { LoginGuardian } from './users/components/login/login-guardian';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [UsersService, CookieService, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}, LoginGuardian],
+  providers: [UsersService, CookieService, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

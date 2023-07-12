@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { modalUsers } from '../button-dialog/button-dialog.component';
 import { HttpStatusCode } from '@angular/common/http';
 import { ModalPasswordComponent } from '../modal-password/modal-password.component';
+import { concat, merge, tap } from 'rxjs';
 
 @Component({
   selector: 'users-list',
@@ -19,9 +20,13 @@ export class UsersListComponent implements OnInit{
 
   displayedColumns: string[] = ['nombre', 'apellido', 'fechaNacimiento', 'email', 'cargo', 'password', 'acciones'];
 
+  public datos:any;
+  public cargos:any;
+
   public userInfo!: Usuarios;
   public userList!: Usuarios[];
   public dataSource: any;
+  public cargoSeleccionado:any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -30,6 +35,7 @@ export class UsersListComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadData()
+    this.loadCargos()
   }
 
   loadData(){
@@ -42,8 +48,17 @@ export class UsersListComponent implements OnInit{
       error: ( error: string ) => {
         console.log(error);
       }
-    }
-    );
+    });
+  }
+
+  loadCargos(){
+    this._userService.getPositionList().subscribe({
+      next: (resp) => {
+        this.cargos = resp
+        console.log(this.cargos);
+
+      }
+    })
   }
 
   applyFilter(event: Event) {
@@ -58,8 +73,15 @@ export class UsersListComponent implements OnInit{
   }
 
   openDialog(user: Usuarios, event: string) {
+
+    for (let i = 0; i < this.cargos.length; i++) {
+      if ( user.ID_CARGO === this.cargos[i].ID_CARGO) {
+        this.cargoSeleccionado = this.cargos[i].CARGO
+      }
+    }
+
     this.dialog.open(modalUsers, {
-      data: {user , event}
+      data: {user , event, cargo:this.cargoSeleccionado}
     });
   }
 

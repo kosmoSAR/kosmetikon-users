@@ -39,7 +39,12 @@
     <ng-container matColumnDef="cargo">
       <th mat-header-cell *matHeaderCellDef> Cargo </th>
       <td mat-cell *matCellDef="let user">
-          {{user.CARGO}}
+        <div style="display: flex;">
+          {{user.ID_CARGO}}-
+          <div *ngFor="let cargo of cargos" >
+            <span *ngIf="cargo.ID_CARGO === user.ID_CARGO">{{cargo.CARGO}}</span>
+          </div>
+        </div>
       </td>
     </ng-container>
 

@@ -27,25 +27,33 @@
 
     <mat-form-field style="width: 250px;">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="Nuevo correo" formControlName="email" >
+      <input matInput placeholder="Nuevo correo" formControlName="email">
     </mat-form-field>
   </div>
 
   <div style="display: flex; justify-content: space-evenly;">
     <mat-form-field style="margin-right: 1rem; width: 250px;">
-      <mat-label>Cargo</mat-label>
-      <mat-select formControlName="cargo">
-        <input (keyup)="onKey()" placeholder="Filtra el Cargo" #txtTagInput style="margin: 1rem; width: 70%;">
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let state of selectedStates" [value]="state">{{state}}</mat-option>
-      </mat-select>
+      <mat-label>Cargos</mat-label>
+      <input type="text"
+        placeholder="Pick one"
+        aria-label="Number"
+        matInput
+        [matAutocomplete]="auto"
+        #txtTagInput
+        (keyup)="filtro()"
+        formControlName="cargo">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let cargo of filteredOptions" [value]="cargo.ID_CARGO + '-' + cargo.CARGO">
+          {{cargo.CARGO}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" style="width: 250px;">
+    <mat-form-field style="width: 250px;">
       <mat-label>Password</mat-label>
       <input matInput placeholder="Nueva contraseña" formControlName="password">
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="forms.invalid" >Aceptar</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="forms.invalid">Aceptar</button>
 </form>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Usuarios } from '../interfaces/users.interface';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -38,6 +38,12 @@ export class UsersService {
 
   logout(): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/logout`);
+  }
+
+  getPositionList(): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/getPositionList`).pipe(
+      map( ( cargos ) => cargos.data )
+    );
   }
 
 }

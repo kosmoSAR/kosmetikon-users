@@ -17,11 +17,6 @@
     </div>
 
     <div style="display: flex; justify-content: space-evenly;">
-      <!-- <mat-form-field style="margin-right: 1rem; width: 225px;">
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput formControlName="fechaNacimiento" [maxLength]="10">
-        <mat-hint>YYYY-MM-DD</mat-hint>
-      </mat-form-field> -->
       <mat-form-field style="margin-right: 1rem; width: 225px;">
         <mat-label>Choose a date</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
@@ -38,12 +33,20 @@
 
     <div style="display: flex; justify-content: space-evenly;">
       <mat-form-field style="margin-right: 1rem; width: 225px;">
-        <mat-label>Cargo</mat-label>
-        <mat-select formControlName="cargo">
-          <mat-option value="">ninguno</mat-option>
-          <mat-option value="R&D Manager">R&D Manager</mat-option>
-          <mat-option value="Employee">Employee</mat-option>
-        </mat-select>
+        <mat-label>Cargos</mat-label>
+        <input type="text"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          [matAutocomplete]="auto"
+          #txtTagInput
+          (keyup)="filtro()"
+          formControlName="cargo">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let cargo of filteredOptions" [value]="cargo.ID_CARGO + '-' + cargo.CARGO">
+            {{cargo.CARGO}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" style="width: 225px;">

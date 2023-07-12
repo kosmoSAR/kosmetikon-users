@@ -37,8 +37,7 @@ export class ModalPasswordComponent {
       next: ( resp: any ) => {
         console.log(resp);
         this.deleteSnackBar();
-        this.dialogRef.close()
-        window.location.href = "./index.html"
+        this.dialogRef.close();
       },
       error: ( error: any ) => {
         console.log(error);

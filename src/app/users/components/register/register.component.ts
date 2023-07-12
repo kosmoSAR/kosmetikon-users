@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -13,6 +13,20 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class RegisterComponent {
 
+  public states: string[] = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+  ];
+
+  selectedStates = this.states;
+
+  @ViewChild('txtTagInput') public tagInput!: ElementRef<HTMLInputElement>
+
   public forms!: FormGroup;
 
   constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar, private router:Router,
@@ -26,6 +40,15 @@ export class RegisterComponent {
           password:['', Validators.required],
         })
     }
+
+  onKey() {
+    this.selectedStates = this.search(this.tagInput.nativeElement.value);
+  }
+
+  search(value: string) {
+    let filter = value.toLowerCase();
+    return this.states.filter(option => option.toLowerCase().startsWith(filter));
+  }
 
     newUser(){
 
@@ -69,14 +92,19 @@ export class RegisterComponent {
       }
 
       login( usuario: any ){
+
         const loginUser:any = {
           EMAIL: usuario.EMAIL,
           PASSWORD: usuario.PASSWORD
         }
 
+        console.log(loginUser);
+
+
         this._userService.login( loginUser ).subscribe({
           next: (resp => {
-            this.cookies.set('token',resp.body.token)
+            this.cookies.set('access_token',resp.body.token)
+
             this.router.navigate(['dashboard'])
           })
         })

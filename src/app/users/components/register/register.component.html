@@ -12,10 +12,17 @@
   </div>
 
   <div style="display: flex; justify-content: space-evenly;">
-    <mat-form-field style="margin-right: 1rem; width: 250px;">
+    <!-- <mat-form-field style="margin-right: 1rem; width: 250px;">
       <mat-label>Fecha de Nacimiento</mat-label>
       <input matInput formControlName="fechaNacimiento" [maxLength]="10">
       <mat-hint>YYYY-MM-DD</mat-hint>
+    </mat-form-field> -->
+    <mat-form-field style="margin-right: 1rem; width: 250px;">
+      <mat-label>Nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field style="width: 250px;">
@@ -28,9 +35,9 @@
     <mat-form-field style="margin-right: 1rem; width: 250px;">
       <mat-label>Cargo</mat-label>
       <mat-select formControlName="cargo">
-        <mat-option value="">ninguno</mat-option>
-        <mat-option value="R&D Manager">R&D Manager</mat-option>
-        <mat-option value="Employee">Employee</mat-option>
+        <input (keyup)="onKey()" placeholder="Filtra el Cargo" #txtTagInput style="margin: 1rem; width: 70%;">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let state of selectedStates" [value]="state">{{state}}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -40,5 +47,5 @@
     </mat-form-field>
   </div>
 
-  <button mat-stroked-button color="primary" type="submit" [disabled]="forms.invalid" >Aceptar</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="forms.invalid" >Aceptar</button>
 </form>

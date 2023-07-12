@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class modalUsers implements OnInit {
 
   public forms!: FormGroup;
 
-  constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar,
+  constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar, private router:Router,
     public dialogRef: MatDialogRef<modalUsers>,
     @Inject(MAT_DIALOG_DATA) public data: any){
 
@@ -109,7 +110,8 @@ export class modalUsers implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     })
-    window.location.href = "./index.html"
+    // window.location.href = "./index.html"
+    this.router.navigate(['dashboard'])
   }
 
   updateSnackBar() {
@@ -118,7 +120,8 @@ export class modalUsers implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });
-    window.location.href = "./index.html"
+    // window.location.href = "./index.html"
+    this.router.navigate(['dashboard'])
   }
 
   errorSnackBar( error: string ) {

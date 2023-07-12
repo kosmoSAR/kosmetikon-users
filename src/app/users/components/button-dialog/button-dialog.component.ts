@@ -45,8 +45,6 @@ export class modalUsers implements OnInit {
   constructor(private fb:FormBuilder, private _userService: UsersService, private _snackBar: MatSnackBar, private router:Router,
     public dialogRef: MatDialogRef<modalUsers>,
     @Inject(MAT_DIALOG_DATA) public data: any){
-      console.log(data);
-
     {
       if ( data.event === 'new' ) {
         this.forms = this.fb.group({
@@ -92,8 +90,6 @@ export class modalUsers implements OnInit {
     this.filteredOptions = this.cargos.filter( (cargo:any) => {
       return cargo.CARGO.toLowerCase().includes(filterValue)
     });
-
-    console.log(this.filteredOptions);
 
   }
 
@@ -149,8 +145,7 @@ export class modalUsers implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     })
-    // window.location.href = "./index.html"
-    this.router.navigate(['dashboard'])
+    window.location.href = "./index.html"
   }
 
   updateSnackBar() {
@@ -159,8 +154,7 @@ export class modalUsers implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });
-    // window.location.href = "./index.html"
-    this.router.navigate(['dashboard'])
+    window.location.href = "./index.html"
   }
 
   errorSnackBar( error: string ) {

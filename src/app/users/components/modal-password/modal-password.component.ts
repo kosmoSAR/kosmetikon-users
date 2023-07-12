@@ -43,6 +43,9 @@ export class ModalPasswordComponent {
         console.log(error);
 
         this.errorSnackBar( error.error.message )
+      },
+      complete: () => {
+        window.location.href = "./index.html"
       }
     })
   }

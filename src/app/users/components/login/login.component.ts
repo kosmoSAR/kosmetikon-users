@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if ( this.cookies.get('token') ) {
+    if ( this.cookies.get('access_token') ) {
       this.firstLogout();
       this.router.navigate(['dashboard']);
     }
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.error()
       }
     })
-    //jsanti3@gmail.com
+    //jsanti@gmail.com
     //123456
   }
 

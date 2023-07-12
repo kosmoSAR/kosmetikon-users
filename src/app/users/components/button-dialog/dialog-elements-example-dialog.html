@@ -1,5 +1,6 @@
 <h1 mat-dialog-title style="display: flex; justify-content: space-between; margin-top: 1rem;">
-  <span>Crea un nuevo usuario</span>
+  <span *ngIf="data.event === 'new'; else update">Crea un nuevo usuario</span>
+  <ng-template #update>Acutaliza al usuario</ng-template>
   <button mat-button mat-dialog-close>Close</button>
 </h1>
 <div mat-dialog-content>

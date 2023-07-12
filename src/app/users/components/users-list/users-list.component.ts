@@ -55,8 +55,6 @@ export class UsersListComponent implements OnInit{
     this._userService.getPositionList().subscribe({
       next: (resp) => {
         this.cargos = resp
-        console.log(this.cargos);
-
       }
     })
   }
